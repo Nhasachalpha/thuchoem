@@ -3,135 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư Cho Em - Hoàng Nam Tiến | Sách Cho Người Trẻ</title>
-    <meta name="description" content="Đặt mua sách 'Thư Cho Em' của tác giả Hoàng Nam Tiến. Những bài học sâu sắc, góc nhìn thẳng thắn về cuộc sống, sự nghiệp dành cho người trẻ.">
-    <meta name="keywords" content="Thư Cho Em, Hoàng Nam Tiến, sách phát triển bản thân, bài học cuộc sống, FPT, sách cho người trẻ">
+    <title>Thư Cho Em - Hoàng Nam Tiến | Chuyện tình vượt thế kỷ</title>
+    <meta name="description" content="Đặt mua sách 'Thư Cho Em' của tác giả Hoàng Nam Tiến. Hơn 400 lá thư, một hành trình 1300km đạp xe cưới vợ và một tình yêu lớn lên giữa bom đạn.">
+    <meta name="keywords" content="Thư Cho Em, Hoàng Nam Tiến, Tướng Hoàng Đan, sách hồi ký, chuyện tình, lịch sử, Điện Biên Phủ">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom Styles */
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa; /* A slightly cooler background */
-            color: #212529;
-        }
-        .bg-gradient-header {
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-        }
-        .bg-gradient-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        .book-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        .btn-secondary {
-            background-color: #ffffff;
-            color: #007bff;
-            border: 1px solid #007bff;
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background-color: #e7f3ff;
-            transform: translateY(-2px);
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; color: #212529; }
+        .bg-gradient-header { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); }
+        .bg-gradient-section { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .book-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .book-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+        .btn-primary { background-color: #007bff; color: white; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .btn-primary:hover { background-color: #0056b3; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
+        .btn-secondary { background-color: #ffffff; color: #007bff; border: 1px solid #007bff; transition: all 0.3s ease; }
+        .btn-secondary:hover { background-color: #e7f3ff; transform: translateY(-2px); }
         .feature-icon { color: #007bff; }
         .text-custom-red { color: #dc3545; }
         .bg-custom-red { background-color: #dc3545; }
-
-        /* Countdown Timer Styles */
-        .countdown-timer span {
-            background-color: rgba(0, 123, 255, 0.1);
-            color: #0056b3;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-weight: 600;
-            margin: 0 0.15rem;
-        }
-
-        /* Recent Order Popup Styles */
-        #recent-order-popup {
-            position: fixed; bottom: 20px; left: 20px;
-            background-color: rgba(255, 255, 255, 0.95);
-            border: 1px solid #ddd; border-radius: 8px; padding: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); z-index: 1000;
-            display: none; transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-            transform: translateX(-150%); opacity: 0; max-width: 350px;
-        }
+        .countdown-timer span { background-color: rgba(0, 123, 255, 0.1); color: #0056b3; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; margin: 0 0.15rem; }
+        #recent-order-popup { position: fixed; bottom: 20px; left: 20px; background-color: rgba(255, 255, 255, 0.95); border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); z-index: 1000; display: none; transition: transform 0.5s ease-out, opacity 0.5s ease-out; transform: translateX(-150%); opacity: 0; max-width: 350px; }
         #recent-order-popup.show { transform: translateX(0); opacity: 1; }
         #recent-order-popup p { margin: 0; font-size: 0.9rem; line-height: 1.4; }
         #recent-order-popup .customer-name { font-weight: 600; color: #007bff; }
         #recent-order-popup .time-ago { font-size: 0.75rem; color: #666; margin-top: 4px; display: block; }
-        #recent-order-popup .close-btn {
-            position: absolute; top: 5px; right: 8px; background: none; border: none;
-            font-size: 1.2rem; color: #aaa; cursor: pointer; padding: 0; line-height: 1;
-        }
+        #recent-order-popup .close-btn { position: absolute; top: 5px; right: 8px; background: none; border: none; font-size: 1.2rem; color: #aaa; cursor: pointer; padding: 0; line-height: 1; }
         #recent-order-popup .close-btn:hover { color: #333; }
-
-        /* Testimonial Image Styles */
-        .testimonial-img {
-            width: 60px; height: 60px; border-radius: 50%;
-            object-fit: cover; border: 3px solid #007bff; margin-right: 1rem;
-        }
-
-        /* Detail Slider */
+        .testimonial-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid #007bff; margin-right: 1rem; }
         .detail-slider-image { max-height: 400px; object-fit: contain; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .detail-content { display: none; }
         .detail-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .detail-nav-button {
-            background-color: rgba(0, 123, 255, 0.7); color: white; border: none;
-            border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer;
-            transition: background-color 0.3s ease; position: absolute; top: 50%;
-            transform: translateY(-50%); z-index: 10;
-        }
+        .detail-nav-button { background-color: rgba(0, 123, 255, 0.7); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s ease; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
         .detail-nav-button:hover { background-color: rgba(0, 86, 179, 1); }
         .detail-prev { left: 10px; }
         .detail-next { right: 10px; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 0.75rem; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         @media (max-width: 768px) {
             .detail-slider-container { flex-direction: column; }
             .detail-slider-image-wrapper { margin-bottom: 1rem; width: 100%; }
             .detail-slider-content-wrapper { width: 100%; }
             .detail-slider-image { max-height: 300px; }
         }
-        
-        /* Video Section */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
     </style>
      <script>
     !function(f,b,e,v,n,t,s)
@@ -154,8 +70,8 @@
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div class="text-center md:text-left">
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-gray-800">THƯ CHO EM</h1>
-                <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-blue-800">Những lá thư gửi người trẻ của Chủ tịch Hoàng Nam Tiến</h2>
-                <p class="text-base md:text-lg text-gray-700 mb-6">Những lời khuyên thẳng thắn, những câu chuyện chân thật và bài học sâu sắc về cuộc sống, sự nghiệp và hành trình đi tìm bản ngã - tất cả được gói gọn trong cuốn sách đặc biệt này.</p>
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-blue-800">"Đi Điện Biên Phủ về, ta cưới!" - Chuyện tình vượt thế kỷ của Tướng Hoàng Đan và vợ.</h2>
+                <p class="text-base md:text-lg text-gray-700 mb-6">Hơn 400 lá thư xuyên qua hai cuộc chiến, một hành trình 1300 cây số đạp xe để cưới vợ, và một tình yêu lớn lên giữa bom đạn. [cite_start]"Thư Cho Em" không chỉ là hồi ký, mà là bản tình ca bất hủ về một thế hệ anh hùng và lãng mạn. [cite: 65, 94, 570]</p>
                 <div class="mb-6 text-center md:text-left">
                     <p class="text-lg font-semibold text-custom-red mb-2">🔥 Ưu đãi đặc biệt kết thúc sau:</p>
                     <div id="countdown-timer" class="countdown-timer text-xl md:text-2xl">
@@ -182,19 +98,19 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">TẠI SAO BẠN NÊN ĐỌC "THƯ CHO EM"?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-md text-center transition duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-lightbulb"></i> </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-800">Bài Học Sâu Sắc</h3>
-                    <p class="text-gray-700">Những bài học được đúc kết từ hàng chục năm kinh nghiệm thương trường của một trong những lãnh đạo hàng đầu Việt Nam.</p>
+                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-heart"></i> </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">CHUYỆN TÌNH CÓ MỘT KHÔNG HAI</h3>
+                    <p class="text-gray-700">Lắng nghe câu chuyện tình yêu đầy hóm hỉnh và sống động qua lời kể của chính tác giả Hoàng Nam Tiến. [cite_start]Một mối tình được vun đắp bởi hơn 400 lá thư và một lời hứa "Thắng Điện Biên Phủ, người lính về cưới vợ". [cite: 94, 114, 560]</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md text-center transition duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-glasses"></i> </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-800">Góc Nhìn Thực Tế</h3>
-                    <p class="text-gray-700">Không giáo điều, không sáo rỗng. Tác giả đưa ra những góc nhìn thẳng thắn và thực tế về thách thức mà người trẻ phải đối mặt.</p>
+                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-book-open-reader"></i> </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">BÀI HỌC VỀ YÊU THƯƠNG</h3>
+                    [cite_start]<p class="text-gray-700">Khám phá cách một vị tướng "soái ca" và một người phụ nữ mạnh mẽ đã nỗ lực thấu hiểu, bao dung và giữ lửa tình yêu trong gần 50 năm xa cách. [cite: 70, 61, 461]</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md text-center transition duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-fire"></i> </div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-800">Truyền Cảm Hứng</h3>
-                    <p class="text-gray-700">Những câu chuyện về thất bại, thành công và sự nỗ lực không ngừng nghỉ sẽ tiếp thêm động lực cho bạn trên con đường riêng.</p>
+                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-monument"></i> </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">CHẠM VÀO LỊCH SỬ</h3>
+                    [cite_start]<p class="text-gray-700">Sống lại những thời khắc hào hùng của dân tộc, từ chiến dịch Điện Biên Phủ, Khe Sanh đến ngày thống nhất, qua những dòng thư tay thấm đượm tình yêu đất nước. [cite: 37, 40, 730, 731, 732, 733]</p>
                 </div>
             </div>
         </div>
@@ -210,117 +126,72 @@
     </section>
     <section id="explore-books" class="py-16 px-4 bg-gradient-section">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">CUỐN SÁCH NÀY DÀNH CHO AI?</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div class="book-card bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <img src="https://cdn0.fahasa.com/media/catalog/product/t/h/thu-cho-em---bia-1.jpg" alt="Bìa sách Thư Cho Em" class="rounded-md shadow-md mb-4 w-full max-w-[250px]">
-                    <h3 class="text-2xl font-bold mb-2 text-blue-800 text-center">Thư Cho Em</h3>
-                    <div class="text-center mb-4">
-                        <span class="text-lg line-through text-gray-500 mr-2">250.000đ</span>
-                        <span class="text-3xl font-bold text-custom-red">199.000đ</span>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">NHỮNG TRANG THƯ VIẾT VỘI GIỮA HAI BÊN SÚNG...</h2>
+            <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 detail-slider-container">
+                <div class="w-full md:w-1/2 relative detail-slider-image-wrapper">
+                    <img id="book-image" src="https://i.ytimg.com/vi/qY8rRit3q8Y/maxresdefault.jpg" alt="Chi tiết sách Thư Cho Em" class="detail-slider-image w-full">
+                    <button class="detail-nav-button detail-prev" onclick="changeDetailSlide('book', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="detail-nav-button detail-next" onclick="changeDetailSlide('book', 1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="w-full md:w-1/2 detail-slider-content-wrapper">
+                    <div id="book-content-0" class="detail-content active">
+                        <h4 class="text-xl font-semibold mb-3 text-blue-800">ĐI ĐIỆN BIÊN PHỦ VỀ, TA CƯỚI!</h4>
+                        [cite_start]<p class="text-gray-700 mb-2">"Anh vẫn tin nhất định chinh phục được trái tim em, vì anh biết em chưa yêu ai... Em chưa yêu ai thì làm sao em lại không yêu anh?". [cite: 75, 271] [cite_start]Theo chân người lính trẻ trong hành trình 1300km đạp xe tìm vợ sau chiến thắng Điện Biên Phủ. [cite: 570]</p>
                     </div>
-                    <ul class="space-y-3 text-gray-700 text-left w-full px-4 list-disc list-inside">
-                        <li><b>Sinh viên</b> đang loay hoay tìm định hướng.</li>
-                        <li><b>Người mới đi làm</b> cần lời khuyên để bứt phá.</li>
-                        <li><b>Bất cứ ai</b> muốn có cái nhìn sâu sắc hơn về cuộc sống.</li>
-                        <li><b>Người hâm mộ</b> tác giả Hoàng Nam Tiến.</li>
-                    </ul>
-                    <div class="mt-auto pt-6 flex justify-center w-full">
-                        <a href="#order-now" class="btn-primary text-center py-3 px-8 rounded-full font-bold">Đặt Mua Ngay <i class="fas fa-arrow-right ml-2"></i></a>
+                    <div id="book-content-1" class="detail-content">
+                        <h4 class="text-xl font-semibold mb-3 text-blue-800">HƯƠNG GÂY MÙI NHỚ</h4>
+                        [cite_start]<p class="text-gray-700 mb-2">1400 ngày cách xa, 400 lá thư xuyên lục địa. [cite: 26] [cite_start]Cùng đọc những dòng thư tay khi ông đi học ở Liên Xô, nơi tình yêu được nuôi dưỡng bằng nỗi nhớ và khát khao thấu hiểu. [cite: 39]</p>
+                    </div>
+                    <div id="book-content-2" class="detail-content">
+                        <h4 class="text-xl font-semibold mb-3 text-blue-800">THƯ CHO EM GIỮA HAI BÊN SÚNG ĐỊCH TA VẪN NỔ</h4>
+                        [cite_start]<p class="text-gray-700 mb-2">"Hẹn gặp em trong chiến thắng 1974-1975". [cite: 28] [cite_start]Những lời yêu từ mặt trận Trị-Thiên 1972, Thượng Đức 1974... minh chứng cho một tình yêu sắt son giữa khói lửa chiến tranh. [cite: 40]</p>
+                    </div>
+                    <div id="book-content-3" class="detail-content">
+                        <h4 class="text-xl font-semibold mb-3 text-blue-800">VỀ ĐÂY BÊN NHAU</h4>
+                        [cite_start]<p class="text-gray-700 mb-2">"Hòa bình của vị chiến tướng". [cite: 30] [cite_start]Những câu chuyện đời thường sau ngày đất nước thống nhất, khi tình yêu đã đơm hoa kết trái sau bao năm tháng đợi chờ. [cite: 733]</p>
                     </div>
                 </div>
-                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">✨ Đặc điểm nổi bật:</h3>
-                    <ul class="space-y-3 text-gray-800">
-                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Những lá thư chân thành, văn phong gần gũi.</span></li>
-                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Câu chuyện thực tế từ chính trải nghiệm của tác giả.</span></li>
-                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Lời khuyên thẳng thắn, không né tránh về thất bại.</span></li>
-                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Thiết kế hiện đại, bìa cứng sang trọng, phù hợp làm quà tặng.</span></li>
-                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>In trên giấy chất lượng cao, bảo vệ mắt.</span></li>
-                    </ul>
-                    <div class="mt-6 p-4 bg-white rounded-lg border-2 border-dashed border-blue-400">
-                        <h4 class="font-semibold text-blue-900 mb-2">🎁 Tặng kèm khi đặt hàng hôm nay:</h4>
-                        <p class="text-sm text-gray-700"><i class="fas fa-bookmark text-blue-500 mr-1"></i> Bookmark thiết kế độc quyền + File tóm tắt sách PDF.</p>
-                    </div>
-                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="#order-now" class="btn-primary text-lg font-bold py-3 px-8 rounded-full">Tôi muốn mua sách này!</a>
             </div>
         </div>
     </section>
 
     <section class="py-16 px-4 bg-white">
         <div class="container mx-auto">
-            <div id="book-details" class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-lg scroll-mt-20">
-                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-gray-800 text-center">KHÁM PHÁ NỘI DUNG SÁCH</h2>
-                <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 detail-slider-container">
-                    <div class="w-full md:w-1/2 relative detail-slider-image-wrapper">
-                        <img id="book-image" src="https://i.ytimg.com/vi/qY8rRit3q8Y/maxresdefault.jpg" alt="Chi tiết sách Thư Cho Em" class="detail-slider-image w-full">
-                        <button class="detail-nav-button detail-prev" onclick="changeDetailSlide('book', -1)"><i class="fas fa-chevron-left"></i></button>
-                        <button class="detail-nav-button detail-next" onclick="changeDetailSlide('book', 1)"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div class="w-full md:w-1/2 detail-slider-content-wrapper">
-                        <div id="book-content-0" class="detail-content active">
-                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 1: Thư gửi tuổi 20</h4>
-                            <p class="text-gray-700 mb-2">Tác giả nhìn lại tuổi trẻ của chính mình, chia sẻ về những sai lầm, khát vọng và những điều ông ước mình biết sớm hơn. Một lời nhắn nhủ cho những ai đang ở ngưỡng cửa cuộc đời.</p>
-                        </div>
-                        <div id="book-content-1" class="detail-content">
-                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 2: Về sự học & Công việc</h4>
-                            <p class="text-gray-700 mb-2">Học không chỉ ở trường lớp. Làm không chỉ để kiếm tiền. Khám phá triết lý về việc học tập suốt đời và tìm kiếm ý nghĩa thực sự trong công việc bạn làm.</p>
-                        </div>
-                        <div id="book-content-2" class="detail-content">
-                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 3: Đối diện Thất bại</h4>
-                            <p class="text-gray-700 mb-2">Hoàng Nam Tiến không ngần ngại kể về những lần "sấp mặt" của mình. Đây là những bài học đắt giá nhất, giúp bạn học cách đứng lên mạnh mẽ hơn sau mỗi lần vấp ngã.</p>
-                        </div>
-                        <div id="book-content-3" class="detail-content">
-                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 4: Xây dựng các mối Quan hệ</h4>
-                            <p class="text-gray-700 mb-2">Gia đình, bạn bè, đồng nghiệp, đối tác. Cuộc sống là một chuỗi các mối quan hệ. Làm sao để xây dựng và duy trì chúng một cách chân thành và hiệu quả?</p>
-                        </div>
-                        <div id="book-content-4" class="detail-content">
-                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 5: Về một cuộc đời đáng sống</h4>
-                            <p class="text-gray-700 mb-2">Tiền bạc, danh vọng có phải là tất cả? Lá thư cuối cùng là những chiêm nghiệm sâu sắc về hạnh phúc, sự cho đi và cách để sống một cuộc đời trọn vẹn, không hối tiếc.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-8">
-                    <a href="#order-now" class="btn-primary text-lg font-bold py-3 px-8 rounded-full">Tôi muốn mua sách này!</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-16 px-4 bg-gradient-section">
-        <div class="container mx-auto">
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">BẠN ĐỌC NÓI GÌ VỀ "THƯ CHO EM"?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-400">
                     <div class="flex mb-4 text-yellow-400"> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> </div>
-                    <p class="italic text-gray-700 mb-4">"Giống như có một người anh lớn đang ngồi trò chuyện và cho mình lời khuyên vậy. Rất chân thật và thấm thía. Cuốn sách gối đầu giường của mình bây giờ!"</p>
+                    <p class="italic text-gray-700 mb-4">"Tôi đã khóc khi đọc về hành trình ba đạp 1300 cây số để tìm mẹ. Một tình yêu thật đẹp, thật kiên định. Đây không phải tiểu thuyết, đây là cuộc đời! [cite_start]Cuốn sách này khiến tôi tin hơn vào tình yêu đích thực." [cite: 570]</p>
                     <div class="flex items-center">
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Độc giả nữ" class="testimonial-img">
                         <div>
-                            <p class="font-medium text-blue-900">Nguyễn Thu Trang</p>
-                            <p class="text-sm text-gray-600">23 tuổi, Nhân viên văn phòng</p>
+                            <p class="font-medium text-blue-900">Lan Anh</p>
+                            <p class="text-sm text-gray-600">25 tuổi, TP. Hồ Chí Minh</p>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-400">
                     <div class="flex mb-4 text-yellow-400"> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> </div>
-                    <p class="italic text-gray-700 mb-4">"Là một người làm quản lý, tôi tìm thấy sự đồng cảm trong những câu chuyện của anh Tiến. Sách không chỉ cho người trẻ, mà còn cho cả những người đang dẫn dắt họ."</p>
+                    [cite_start]<p class="italic text-gray-700 mb-4">"Là một người lính, tôi thực sự xúc động. Cuốn sách là một tư liệu quý giá, không chỉ về tình yêu mà còn về một thế hệ đã sống và chiến đấu phi thường. Cách Tướng Hoàng Đan viết thư cho vợ vừa tình cảm vừa dí dỏm, rất đáng ngưỡng mộ." [cite: 70, 682]</p>
                     <div class="flex items-center">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Độc giả nam" class="testimonial-img">
                         <div>
-                            <p class="font-medium text-blue-900">Trần Mạnh Hùng</p>
-                            <p class="text-sm text-gray-600">32 tuổi, Team Leader</p>
+                            <p class="font-medium text-blue-900">Chú Minh Quân</p>
+                            <p class="text-sm text-gray-600">58 tuổi, Hà Nội</p>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-400">
                     <div class="flex mb-4 text-yellow-400"> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> </div>
-                    <p class="italic text-gray-700 mb-4">"Đọc sách mà cứ ngỡ đang nghe chú Tiến nói chuyện. Rất thẳng, rất thật. Nhiều đoạn phải dừng lại để suy ngẫm. Rất đáng tiền!"</p>
+                    [cite_start]<p class="italic text-gray-700 mb-4">"Chúng tôi đã đọc chung cuốn sách này. Nó dạy chúng tôi rất nhiều về sự kiên nhẫn và bao dung trong tình yêu. 'Khi Tổ quốc cần, họ biết sống xa nhau' - câu nói ám ảnh và truyền cảm hứng cho chúng tôi rất nhiều." [cite: 70]</p>
                     <div class="flex items-center">
                         <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2561&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Độc giả nữ trẻ" class="testimonial-img">
                         <div>
-                            <p class="font-medium text-blue-900">Lê Minh Anh</p>
-                            <p class="text-sm text-gray-600">20 tuổi, Sinh viên</p>
+                            <p class="font-medium text-blue-900">Cặp đôi Việt & Hằng</p>
+                            <p class="text-sm text-gray-600">Đà Nẵng</p>
                         </div>
                     </div>
                 </div>
@@ -339,15 +210,16 @@
                             <div class="flex items-center border-2 border-blue-500 p-4 rounded-lg bg-blue-50">
                                 <input type="radio" id="product" name="product" value="Sách Thư Cho Em - 199.000đ (Miễn phí vận chuyển)" class="mr-3 h-5 w-5 accent-blue-600 flex-shrink-0" checked>
                                 <label for="product" class="flex-1 cursor-pointer">
-                                    <p class="font-medium">Sách "Thư Cho Em"</p>
-                                    <p class="text-custom-red font-bold">199.000đ <span class="text-blue-600 ml-2 text-sm">🚚 Miễn phí vận chuyển</span></p>
+                                    <p class="font-medium">Sách "Thư Cho Em" của Hoàng Nam Tiến</p>
+                                    [cite_start]<p class="text-sm text-gray-600">Hồi ký về chuyện tình của Thiếu tướng Hoàng Đan và vợ, Đại biểu Quốc hội Nguyễn Thị An Vinh, qua lời kể của con trai. [cite: 34, 65]</p>
+                                    <p class="text-custom-red font-bold mt-2">199.000đ <span class="text-blue-600 ml-2 text-sm">🚚 Miễn phí vận chuyển</span></p>
                                     <p class="text-sm text-gray-600">(Giá gốc: 250.000đ - Tiết kiệm: 51.000đ)</p>
                                 </label>
                             </div>
                         </div>
                         <h3 class="text-xl font-semibold mb-3 mt-6 text-blue-800">Cam kết chất lượng:</h3>
                         <ul class="space-y-2 text-gray-700 text-sm">
-                            <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Sách thật, bìa cứng, giấy cao cấp, nội dung nguyên bản.</span></li>
+                            [cite_start]<li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Sách thật 100%, bìa cứng, in trên giấy chất lượng cao, kèm những hình ảnh tư liệu quý giá. [cite: 89, 727]</span></li>
                             <li class="flex items-start"><i class="fas fa-truck text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Giao hàng nhanh toàn quốc (2-5 ngày).</span></li>
                             <li class="flex items-start"><i class="fas fa-hand-holding-usd text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Thanh toán khi nhận hàng (COD), được kiểm tra trước.</span></li>
                             <li class="flex items-start"><i class="fas fa-sync-alt text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Đổi trả miễn phí trong 7 ngày nếu có lỗi từ nhà sản xuất.</span></li>
@@ -416,7 +288,7 @@
                     <ul class="space-y-2 text-sm">
                         <li class="flex items-start"><i class="fas fa-phone-alt mt-1 mr-3 text-blue-300"></i><span>Hotline: <a href="tel:0987654321" class="hover:text-white">0987.654.321</a></span></li>
                         <li class="flex items-start"><i class="fas fa-envelope mt-1 mr-3 text-blue-300"></i><span>Email: <a href="mailto:sach@thuchoem.vn" class="hover:text-white">sach@thuchoem.vn</a></span></li>
-                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-300"></i><span>Địa chỉ: Tòa nhà FPT, Cầu Giấy, Hà Nội</span></li>
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-300"></i><span>Đơn vị phát hành: Công ty Nhã Nam</span></li>
                     </ul>
                 </div>
                 <div>
@@ -438,7 +310,7 @@
             </div>
             <div class="border-t border-gray-700 pt-6 text-center text-sm">
                 <p>&copy; 2024 Landing Page for "Thư Cho Em". All Rights Reserved.</p>
-                <p>Website được thiết kế cho mục đích quảng bá sách.</p>
+                [cite_start]<p>Copyright © Hoàng Nam Tiến, 2023. [cite: 8] [cite_start]Xuất bản bởi Nhã Nam và NXB Hội Nhà Văn. [cite: 9, 17]</p>
             </div>
         </div>
     </footer>
@@ -452,11 +324,10 @@
     <script>
         // --- Book Detail Slider Logic ---
         const bookDetails = {
-            book: { currentIndex: 0, totalSlides: 5, images: [
+            book: { currentIndex: 0, totalSlides: 4, images: [
                 "https://i.ytimg.com/vi/qY8rRit3q8Y/maxresdefault.jpg", 
                 "https://file.qdnd.vn/data/images/0/2023/12/12/hienle/1a.jpg?t=1702381274",
                 "https://images2.thanhnien.vn/528068263637045248/2023/12/12/hoang-nam-tien-17023927652751410495804.jpg",
-                "https://vneconomy.mediacdn.vn/zoom/710_400/2023/12/13/hoang-nam-tien-17024040984921609380757-0-24-386-640-crop-17024041029251862900720.jpg",
                 "https://cdn0.fahasa.com/media/catalog/product/t/h/thu-cho-em---bia-1.jpg"
             ] }
         };
@@ -554,11 +425,9 @@
         async function fetchAddressData() { 
             const apiUrl = 'https://provinces.open-api.vn/api/?depth=3'; 
             try { 
-                console.log("Fetching address data..."); 
                 const response = await fetch(apiUrl); 
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`); 
                 addressData = await response.json(); 
-                console.log("Address data fetched successfully:", addressData.length, "cities"); 
                 renderCityOptions(addressData); 
             } catch (error) { 
                 console.error('Error loading address data:', error); 
@@ -675,22 +544,19 @@
                 const result = await response.json(); 
                 
                 if (response.ok && result.created) { 
-                    // === BẮT ĐẦU: THÊM MÃ TRACKING PIXEL TẠI ĐÂY ===
                     if (typeof fbq === 'function') {
                         fbq('track', 'CompleteRegistration', {
                             value: 199000,
                             currency: 'VND'
                         });
                     }
-                    // === KẾT THÚC: THÊM MÃ TRACKING PIXEL TẠI ĐÂY ===
-
                     const successMessage = document.getElementById('successMessage'); 
                     if (successMessage) { 
                         successMessage.classList.remove('hidden'); 
                         successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
                     } 
                     event.target.reset(); 
-                    renderCityOptions(addressData); // Re-render cities after reset
+                    renderCityOptions(addressData);
                 } else { 
                     console.error('SheetDB Error:', result); 
                     alert(`Có lỗi xảy ra khi gửi đơn hàng: ${result.error || 'Vui lòng thử lại.'}`); 
@@ -706,23 +572,14 @@
 
         // --- Initialization on DOMContentLoaded ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize slider
             showDetailSlide('book', 0);
-
-            // Set current date for form
             const now = new Date();
             const dateStr = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
             const orderDateInput = document.getElementById('orderDate');
             if(orderDateInput) orderDateInput.value = dateStr;
-
-            // Fetch address data
             fetchAddressData();
-
-            // Attach form submit listener
             const orderForm = document.getElementById('orderForm');
             if (orderForm) orderForm.addEventListener('submit', handleOrderSubmit);
-
-            // Start Countdown Timer
             const countdownDisplay = document.getElementById('countdown-timer');
             if (countdownDisplay) {
                 const now = new Date();
@@ -734,10 +591,8 @@
                      countdownDisplay.innerHTML = "<span class='text-custom-red'>ƯU ĐÃI ĐÃ KẾT THÚC!</span>";
                 }
             }
-
-             // Start Recent Order Popup
-             setTimeout(showRecentOrderPopup, 5000); // Show first popup after 5 seconds
-             setInterval(showRecentOrderPopup, 18000 + Math.random() * 7000); // Show subsequent popups randomly between 18-25 seconds
+             setTimeout(showRecentOrderPopup, 5000);
+             setInterval(showRecentOrderPopup, 18000 + Math.random() * 7000);
         });
     </script>
 </body>
