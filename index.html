@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Cho Em - Hoàng Nam Tiến | Sách Cho Người Trẻ</title>
+    <meta name="description" content="Đặt mua sách 'Thư Cho Em' của tác giả Hoàng Nam Tiến. Những bài học sâu sắc, góc nhìn thẳng thắn về cuộc sống, sự nghiệp dành cho người trẻ.">
+    <meta name="keywords" content="Thư Cho Em, Hoàng Nam Tiến, sách phát triển bản thân, bài học cuộc sống, FPT, sách cho người trẻ">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa; /* A slightly cooler background */
+            color: #212529;
+        }
+        .bg-gradient-header {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+        .bg-gradient-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .book-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #007bff;
+            border: 1px solid #007bff;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #e7f3ff;
+            transform: translateY(-2px);
+        }
+        .feature-icon { color: #007bff; }
+        .text-custom-red { color: #dc3545; }
+        .bg-custom-red { background-color: #dc3545; }
+
+        /* Countdown Timer Styles */
+        .countdown-timer span {
+            background-color: rgba(0, 123, 255, 0.1);
+            color: #0056b3;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            margin: 0 0.15rem;
+        }
+
+        /* Recent Order Popup Styles */
+        #recent-order-popup {
+            position: fixed; bottom: 20px; left: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 1px solid #ddd; border-radius: 8px; padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); z-index: 1000;
+            display: none; transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            transform: translateX(-150%); opacity: 0; max-width: 350px;
+        }
+        #recent-order-popup.show { transform: translateX(0); opacity: 1; }
+        #recent-order-popup p { margin: 0; font-size: 0.9rem; line-height: 1.4; }
+        #recent-order-popup .customer-name { font-weight: 600; color: #007bff; }
+        #recent-order-popup .time-ago { font-size: 0.75rem; color: #666; margin-top: 4px; display: block; }
+        #recent-order-popup .close-btn {
+            position: absolute; top: 5px; right: 8px; background: none; border: none;
+            font-size: 1.2rem; color: #aaa; cursor: pointer; padding: 0; line-height: 1;
+        }
+        #recent-order-popup .close-btn:hover { color: #333; }
+
+        /* Testimonial Image Styles */
+        .testimonial-img {
+            width: 60px; height: 60px; border-radius: 50%;
+            object-fit: cover; border: 3px solid #007bff; margin-right: 1rem;
+        }
+
+        /* Detail Slider */
+        .detail-slider-image { max-height: 400px; object-fit: contain; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .detail-content { display: none; }
+        .detail-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .detail-nav-button {
+            background-color: rgba(0, 123, 255, 0.7); color: white; border: none;
+            border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer;
+            transition: background-color 0.3s ease; position: absolute; top: 50%;
+            transform: translateY(-50%); z-index: 10;
+        }
+        .detail-nav-button:hover { background-color: rgba(0, 86, 179, 1); }
+        .detail-prev { left: 10px; }
+        .detail-next { right: 10px; }
+        @media (max-width: 768px) {
+            .detail-slider-container { flex-direction: column; }
+            .detail-slider-image-wrapper { margin-bottom: 1rem; width: 100%; }
+            .detail-slider-content-wrapper { width: 100%; }
+            .detail-slider-image { max-height: 300px; }
+        }
+        
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+     <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '726532000170631');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=726532000170631&ev=PageView&noscript=1"
+    /></noscript>
+</head>
+<body class="bg-white">
+    <header class="bg-gradient-header py-12 md:py-20 px-4">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-gray-800">THƯ CHO EM</h1>
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-blue-800">Những lá thư gửi người trẻ của Chủ tịch Hoàng Nam Tiến</h2>
+                <p class="text-base md:text-lg text-gray-700 mb-6">Những lời khuyên thẳng thắn, những câu chuyện chân thật và bài học sâu sắc về cuộc sống, sự nghiệp và hành trình đi tìm bản ngã - tất cả được gói gọn trong cuốn sách đặc biệt này.</p>
+                <div class="mb-6 text-center md:text-left">
+                    <p class="text-lg font-semibold text-custom-red mb-2">🔥 Ưu đãi đặc biệt kết thúc sau:</p>
+                    <div id="countdown-timer" class="countdown-timer text-xl md:text-2xl">
+                        <span>00</span>:<span>00</span>:<span>00</span>:<span>00</span>
+                    </div>
+                </div>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#order-now" class="btn-primary text-base md:text-lg font-bold py-3 px-6 md:px-8 rounded-full">ĐẶT MUA NGAY</a>
+                    <a href="#explore-books" class="btn-secondary text-base md:text-lg font-bold py-3 px-6 md:px-8 rounded-full">TÌM HIỂU THÊM</a>
+                </div>
+            </div>
+            <div class="relative text-center">
+                <img src="https://cdn0.fahasa.com/media/catalog/product/t/h/thu-cho-em---bia-1.jpg" alt="Sách Thư Cho Em của Hoàng Nam Tiến" class="rounded-lg shadow-2xl mx-auto w-full max-w-sm lg:max-w-md transform hover:scale-105 transition-transform duration-500">
+                <div class="absolute top-4 right-4 md:-top-5 md:-right-5 bg-custom-red text-white font-bold py-2 px-4 rounded-full transform rotate-12 shadow-lg animate-pulse">
+                    <p class="text-sm md:text-base">BEST SELLER!</p>
+                    <p class="text-xs md:text-sm">Chỉ 199K + FREESHIP</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 px-4 bg-gradient-section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">TẠI SAO BẠN NÊN ĐỌC "THƯ CHO EM"?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center transition duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-lightbulb"></i> </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">Bài Học Sâu Sắc</h3>
+                    <p class="text-gray-700">Những bài học được đúc kết từ hàng chục năm kinh nghiệm thương trường của một trong những lãnh đạo hàng đầu Việt Nam.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center transition duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-glasses"></i> </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">Góc Nhìn Thực Tế</h3>
+                    <p class="text-gray-700">Không giáo điều, không sáo rỗng. Tác giả đưa ra những góc nhìn thẳng thắn và thực tế về thách thức mà người trẻ phải đối mặt.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center transition duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="text-5xl feature-icon mb-4 inline-block"> <i class="fas fa-fire"></i> </div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-800">Truyền Cảm Hứng</h3>
+                    <p class="text-gray-700">Những câu chuyện về thất bại, thành công và sự nỗ lực không ngừng nghỉ sẽ tiếp thêm động lực cho bạn trên con đường riêng.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">LẮNG NGHE CHIA SẺ TỪ TÁC GIẢ</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/S_YJgB17r4c?si=Y91tG3T634vjF3h-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <section id="explore-books" class="py-16 px-4 bg-gradient-section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">CUỐN SÁCH NÀY DÀNH CHO AI?</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="book-card bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <img src="https://cdn0.fahasa.com/media/catalog/product/t/h/thu-cho-em---bia-1.jpg" alt="Bìa sách Thư Cho Em" class="rounded-md shadow-md mb-4 w-full max-w-[250px]">
+                    <h3 class="text-2xl font-bold mb-2 text-blue-800 text-center">Thư Cho Em</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-lg line-through text-gray-500 mr-2">250.000đ</span>
+                        <span class="text-3xl font-bold text-custom-red">199.000đ</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-700 text-left w-full px-4 list-disc list-inside">
+                        <li><b>Sinh viên</b> đang loay hoay tìm định hướng.</li>
+                        <li><b>Người mới đi làm</b> cần lời khuyên để bứt phá.</li>
+                        <li><b>Bất cứ ai</b> muốn có cái nhìn sâu sắc hơn về cuộc sống.</li>
+                        <li><b>Người hâm mộ</b> tác giả Hoàng Nam Tiến.</li>
+                    </ul>
+                    <div class="mt-auto pt-6 flex justify-center w-full">
+                        <a href="#order-now" class="btn-primary text-center py-3 px-8 rounded-full font-bold">Đặt Mua Ngay <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">✨ Đặc điểm nổi bật:</h3>
+                    <ul class="space-y-3 text-gray-800">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Những lá thư chân thành, văn phong gần gũi.</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Câu chuyện thực tế từ chính trải nghiệm của tác giả.</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Lời khuyên thẳng thắn, không né tránh về thất bại.</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>Thiết kế hiện đại, bìa cứng sang trọng, phù hợp làm quà tặng.</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i><span>In trên giấy chất lượng cao, bảo vệ mắt.</span></li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-white rounded-lg border-2 border-dashed border-blue-400">
+                        <h4 class="font-semibold text-blue-900 mb-2">🎁 Tặng kèm khi đặt hàng hôm nay:</h4>
+                        <p class="text-sm text-gray-700"><i class="fas fa-bookmark text-blue-500 mr-1"></i> Bookmark thiết kế độc quyền + File tóm tắt sách PDF.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 bg-white">
+        <div class="container mx-auto">
+            <div id="book-details" class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-lg scroll-mt-20">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-gray-800 text-center">KHÁM PHÁ NỘI DUNG SÁCH</h2>
+                <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10 detail-slider-container">
+                    <div class="w-full md:w-1/2 relative detail-slider-image-wrapper">
+                        <img id="book-image" src="https://i.ytimg.com/vi/qY8rRit3q8Y/maxresdefault.jpg" alt="Chi tiết sách Thư Cho Em" class="detail-slider-image w-full">
+                        <button class="detail-nav-button detail-prev" onclick="changeDetailSlide('book', -1)"><i class="fas fa-chevron-left"></i></button>
+                        <button class="detail-nav-button detail-next" onclick="changeDetailSlide('book', 1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="w-full md:w-1/2 detail-slider-content-wrapper">
+                        <div id="book-content-0" class="detail-content active">
+                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 1: Thư gửi tuổi 20</h4>
+                            <p class="text-gray-700 mb-2">Tác giả nhìn lại tuổi trẻ của chính mình, chia sẻ về những sai lầm, khát vọng và những điều ông ước mình biết sớm hơn. Một lời nhắn nhủ cho những ai đang ở ngưỡng cửa cuộc đời.</p>
+                        </div>
+                        <div id="book-content-1" class="detail-content">
+                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 2: Về sự học & Công việc</h4>
+                            <p class="text-gray-700 mb-2">Học không chỉ ở trường lớp. Làm không chỉ để kiếm tiền. Khám phá triết lý về việc học tập suốt đời và tìm kiếm ý nghĩa thực sự trong công việc bạn làm.</p>
+                        </div>
+                        <div id="book-content-2" class="detail-content">
+                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 3: Đối diện Thất bại</h4>
+                            <p class="text-gray-700 mb-2">Hoàng Nam Tiến không ngần ngại kể về những lần "sấp mặt" của mình. Đây là những bài học đắt giá nhất, giúp bạn học cách đứng lên mạnh mẽ hơn sau mỗi lần vấp ngã.</p>
+                        </div>
+                        <div id="book-content-3" class="detail-content">
+                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 4: Xây dựng các mối Quan hệ</h4>
+                            <p class="text-gray-700 mb-2">Gia đình, bạn bè, đồng nghiệp, đối tác. Cuộc sống là một chuỗi các mối quan hệ. Làm sao để xây dựng và duy trì chúng một cách chân thành và hiệu quả?</p>
+                        </div>
+                        <div id="book-content-4" class="detail-content">
+                            <h4 class="text-xl font-semibold mb-3 text-blue-800">Chủ đề 5: Về một cuộc đời đáng sống</h4>
+                            <p class="text-gray-700 mb-2">Tiền bạc, danh vọng có phải là tất cả? Lá thư cuối cùng là những chiêm nghiệm sâu sắc về hạnh phúc, sự cho đi và cách để sống một cuộc đời trọn vẹn, không hối tiếc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="#order-now" class="btn-primary text-lg font-bold py-3 px-8 rounded-full">Tôi muốn mua sách này!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 bg-gradient-section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">BẠN ĐỌC NÓI GÌ VỀ "THƯ CHO EM"?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-400">
+                    <div class="flex mb-4 text-yellow-400"> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> </div>
+                    <p class="italic text-gray-700 mb-4">"Giống như có một người anh lớn đang ngồi trò chuyện và cho mình lời khuyên vậy. Rất chân thật và thấm thía. Cuốn sách gối đầu giường của mình bây giờ!"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Độc giả nữ" class="testimonial-img">
+                        <div>
+                            <p class="font-medium text-blue-900">Nguyễn Thu Trang</p>
+                            <p class="text-sm text-gray-600">23 tuổi, Nhân viên văn phòng</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-400">
+                    <div class="flex mb-4 text-yellow-400"> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> </div>
+                    <p class="italic text-gray-700 mb-4">"Là một người làm quản lý, tôi tìm thấy sự đồng cảm trong những câu chuyện của anh Tiến. Sách không chỉ cho người trẻ, mà còn cho cả những người đang dẫn dắt họ."</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Độc giả nam" class="testimonial-img">
+                        <div>
+                            <p class="font-medium text-blue-900">Trần Mạnh Hùng</p>
+                            <p class="text-sm text-gray-600">32 tuổi, Team Leader</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-400">
+                    <div class="flex mb-4 text-yellow-400"> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> </div>
+                    <p class="italic text-gray-700 mb-4">"Đọc sách mà cứ ngỡ đang nghe chú Tiến nói chuyện. Rất thẳng, rất thật. Nhiều đoạn phải dừng lại để suy ngẫm. Rất đáng tiền!"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2561&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Độc giả nữ trẻ" class="testimonial-img">
+                        <div>
+                            <p class="font-medium text-blue-900">Lê Minh Anh</p>
+                            <p class="text-sm text-gray-600">20 tuổi, Sinh viên</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order-now" class="py-16 px-4 bg-gradient-header scroll-mt-20">
+        <div class="container mx-auto">
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">ĐẶT MUA NGAY - NHẬN ƯU ĐÃI ĐẶC BIỆT</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-800">Thông tin sản phẩm:</h3>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center border-2 border-blue-500 p-4 rounded-lg bg-blue-50">
+                                <input type="radio" id="product" name="product" value="Sách Thư Cho Em - 199.000đ (Miễn phí vận chuyển)" class="mr-3 h-5 w-5 accent-blue-600 flex-shrink-0" checked>
+                                <label for="product" class="flex-1 cursor-pointer">
+                                    <p class="font-medium">Sách "Thư Cho Em"</p>
+                                    <p class="text-custom-red font-bold">199.000đ <span class="text-blue-600 ml-2 text-sm">🚚 Miễn phí vận chuyển</span></p>
+                                    <p class="text-sm text-gray-600">(Giá gốc: 250.000đ - Tiết kiệm: 51.000đ)</p>
+                                </label>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 mt-6 text-blue-800">Cam kết chất lượng:</h3>
+                        <ul class="space-y-2 text-gray-700 text-sm">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Sách thật, bìa cứng, giấy cao cấp, nội dung nguyên bản.</span></li>
+                            <li class="flex items-start"><i class="fas fa-truck text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Giao hàng nhanh toàn quốc (2-5 ngày).</span></li>
+                            <li class="flex items-start"><i class="fas fa-hand-holding-usd text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Thanh toán khi nhận hàng (COD), được kiểm tra trước.</span></li>
+                            <li class="flex items-start"><i class="fas fa-sync-alt text-green-500 mt-1 mr-2 flex-shrink-0"></i><span>Đổi trả miễn phí trong 7 ngày nếu có lỗi từ nhà sản xuất.</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-800">Thông tin nhận hàng:</h3>
+                        <form id="orderForm">
+                            <input type="hidden" id="orderDate" name="date">
+                            <div class="mb-4">
+                                <label for="fullName" class="block mb-1 font-medium text-sm">Họ và tên <span class="text-red-500">*</span></label>
+                                <input type="text" id="fullName" name="name" placeholder="Ví dụ: Nguyễn Văn A" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block mb-1 font-medium text-sm">Số điện thoại <span class="text-red-500">*</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="Số điện thoại để shipper liên hệ" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label for="city" class="block mb-1 font-medium text-sm">Tỉnh/Thành phố <span class="text-red-500">*</span></label>
+                                    <select id="city" name="city" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" required>
+                                        <option value="">Chọn Tỉnh/Thành</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="district" class="block mb-1 font-medium text-sm">Quận/Huyện <span class="text-red-500">*</span></label>
+                                    <select id="district" name="district" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" required>
+                                        <option value="">Chọn Quận/Huyện</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="ward" class="block mb-1 font-medium text-sm">Phường/Xã <span class="text-red-500">*</span></label>
+                                    <select id="ward" name="ward" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" required>
+                                        <option value="">Chọn Phường/Xã</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="addressDetail" class="block mb-1 font-medium text-sm">Địa chỉ chi tiết <span class="text-red-500">*</span></label>
+                                <input type="text" id="addressDetail" name="addressDetail" placeholder="Số nhà, tên đường..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="note" class="block mb-1 font-medium text-sm">Ghi chú (Tùy chọn)</label>
+                                <textarea id="note" name="note" rows="2" placeholder="Ví dụ: Giao hàng trong giờ hành chính..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"></textarea>
+                            </div>
+                            <button type="submit" id="submitOrder" class="w-full btn-primary text-lg font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-center">
+                                <i class="fas fa-shopping-cart mr-2"></i> HOÀN TẤT ĐẶT HÀNG
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div id="successMessage" class="mt-6 p-4 bg-green-100 border border-green-400 text-green-800 rounded-lg hidden success-animation">
+                    <h3 class="text-xl font-bold mb-2"><i class="fas fa-check-circle mr-2"></i>Đặt hàng thành công!</h3>
+                    <p class="mb-2 text-sm">Cảm ơn bạn đã tin tưởng đặt mua sách "Thư Cho Em". Chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ để xác nhận đơn hàng.</p>
+                    <p class="text-sm">Hotline hỗ trợ: <span class="font-bold">0972.048.409</span> (đây là số ví dụ)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-300 py-10 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">LIÊN HỆ PHÂN PHỐI</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fas fa-phone-alt mt-1 mr-3 text-blue-300"></i><span>Hotline: <a href="tel:0987654321" class="hover:text-white">0987.654.321</a></span></li>
+                        <li class="flex items-start"><i class="fas fa-envelope mt-1 mr-3 text-blue-300"></i><span>Email: <a href="mailto:sach@thuchoem.vn" class="hover:text-white">sach@thuchoem.vn</a></span></li>
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-300"></i><span>Địa chỉ: Tòa nhà FPT, Cầu Giấy, Hà Nội</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">CHÍNH SÁCH</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Chính sách vận chuyển</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách đổi trả</a></li>
+                        <li><a href="#" class="hover:text-white">Phương thức thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Bảo mật thông tin</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">KẾT NỐI VỚI TÁC GIẢ</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-2xl hover:text-white"><i class="fab fa-facebook-square"></i></a>
+                        <a href="#" class="text-2xl hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-sm">
+                <p>&copy; 2024 Landing Page for "Thư Cho Em". All Rights Reserved.</p>
+                <p>Website được thiết kế cho mục đích quảng bá sách.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="recent-order-popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <p><i class="fas fa-check-circle text-green-500 mr-1"></i> <span id="popup-customer-name" class="customer-name">Ai đó</span> ở <span id="popup-location">đâu đó</span> vừa đặt mua <span id="popup-product">sách Thư Cho Em</span>.</p>
+        <span id="popup-time" class="time-ago">vài giây trước</span>
+    </div>
+
+    <script>
+        // --- Book Detail Slider Logic ---
+        const bookDetails = {
+            book: { currentIndex: 0, totalSlides: 5, images: [
+                "https://i.ytimg.com/vi/qY8rRit3q8Y/maxresdefault.jpg", 
+                "https://file.qdnd.vn/data/images/0/2023/12/12/hienle/1a.jpg?t=1702381274",
+                "https://images2.thanhnien.vn/528068263637045248/2023/12/12/hoang-nam-tien-17023927652751410495804.jpg",
+                "https://vneconomy.mediacdn.vn/zoom/710_400/2023/12/13/hoang-nam-tien-17024040984921609380757-0-24-386-640-crop-17024041029251862900720.jpg",
+                "https://cdn0.fahasa.com/media/catalog/product/t/h/thu-cho-em---bia-1.jpg"
+            ] }
+        };
+        
+        function showDetailSlide(bookId, index) { 
+            const details = bookDetails[bookId]; 
+            if (!details) return; 
+            details.currentIndex = (index + details.totalSlides) % details.totalSlides; 
+            const imgElement = document.getElementById(`${bookId}-image`); 
+            if(imgElement) { 
+                imgElement.src = details.images[details.currentIndex]; 
+                imgElement.alt = `Chi tiết sách Thư Cho Em - ${details.currentIndex + 1}`; 
+            } 
+            const contentElements = document.querySelectorAll(`[id^="${bookId}-content-"]`); 
+            contentElements.forEach(el => el.classList.remove('active')); 
+            const currentContent = document.getElementById(`${bookId}-content-${details.currentIndex}`); 
+            if (currentContent) { 
+                currentContent.classList.add('active'); 
+            } 
+        }
+        
+        function changeDetailSlide(bookId, direction) { 
+            const details = bookDetails[bookId]; 
+            if (!details) return; 
+            showDetailSlide(bookId, details.currentIndex + direction); 
+        }
+
+        // --- Countdown Timer Logic ---
+        function startCountdown(duration, displayElement) {
+            let timer = duration, days, hours, minutes, seconds;
+            const interval = setInterval(function () {
+                days = parseInt(timer / (60 * 60 * 24), 10);
+                hours = parseInt((timer % (60 * 60 * 24)) / (60 * 60), 10);
+                minutes = parseInt((timer % (60 * 60)) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                days = days < 10 ? "0" + days : days;
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                displayElement.innerHTML = `<span>${days}</span>:<span>${hours}</span>:<span>${minutes}</span>:<span>${seconds}</span>`;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    displayElement.innerHTML = "<span class='text-custom-red'>ƯU ĐÃI ĐÃ KẾT THÚC!</span>";
+                }
+            }, 1000);
+        }
+
+        // --- Recent Order Popup Logic ---
+        const popupElement = document.getElementById('recent-order-popup');
+        const popupCustomerName = document.getElementById('popup-customer-name');
+        const popupLocation = document.getElementById('popup-location');
+        const popupProduct = document.getElementById('popup-product');
+        const popupTime = document.getElementById('popup-time');
+        let popupTimeout;
+
+        const customerNames = ["Bạn Thu Trang", "Anh Mạnh Hùng", "Bạn Minh Anh", "Chị Thanh Mai", "Anh Quốc Bảo"];
+        const locations = ["Hà Nội", "TP. HCM", "Đà Nẵng", "Hải Phòng", "Cần Thơ", "Bình Dương", "Nha Trang"];
+        const products = ["sách Thư Cho Em"];
+
+        function showRecentOrderPopup() {
+             if (!popupElement) return;
+             if (popupTimeout) clearTimeout(popupTimeout);
+
+            const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            const randomProduct = products[Math.floor(Math.random() * products.length)];
+            const randomMinutes = Math.floor(Math.random() * 15) + 1;
+
+            if(popupCustomerName) popupCustomerName.textContent = randomName;
+            if(popupLocation) popupLocation.textContent = randomLocation;
+            if(popupProduct) popupProduct.textContent = randomProduct;
+            if(popupTime) popupTime.textContent = `${randomMinutes} phút trước`;
+
+            popupElement.classList.add('show');
+
+            popupTimeout = setTimeout(() => {
+                popupElement.classList.remove('show');
+            }, 6000);
+        }
+
+        function closePopup() {
+             if (popupTimeout) clearTimeout(popupTimeout);
+             if (popupElement) popupElement.classList.remove('show');
+        }
+
+        // --- Address Data Fetching and Population ---
+        const citySelect = document.getElementById('city');
+        const districtSelect = document.getElementById('district');
+        const wardSelect = document.getElementById('ward');
+        let addressData = [];
+        
+        async function fetchAddressData() { 
+            const apiUrl = 'https://provinces.open-api.vn/api/?depth=3'; 
+            try { 
+                console.log("Fetching address data..."); 
+                const response = await fetch(apiUrl); 
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`); 
+                addressData = await response.json(); 
+                console.log("Address data fetched successfully:", addressData.length, "cities"); 
+                renderCityOptions(addressData); 
+            } catch (error) { 
+                console.error('Error loading address data:', error); 
+                alert('Không thể tải dữ liệu địa chỉ. Vui lòng thử lại sau.'); 
+            } 
+        }
+        
+        function renderCityOptions(data) { 
+            if (!citySelect) return; 
+            citySelect.innerHTML = '<option value="">Chọn Tỉnh/Thành phố</option>'; 
+            data.sort((a, b) => a.name.localeCompare(b.name)); 
+            data.forEach(city => { 
+                const option = document.createElement('option'); 
+                option.value = city.code; 
+                option.textContent = city.name; 
+                citySelect.appendChild(option); 
+            }); 
+            resetSelect(districtSelect, 'Chọn Quận/Huyện'); 
+            resetSelect(wardSelect, 'Chọn Phường/Xã'); 
+        }
+        
+        function renderDistrictOptions(cityCode) { 
+            if (!districtSelect) return; 
+            resetSelect(districtSelect, 'Chọn Quận/Huyện'); 
+            resetSelect(wardSelect, 'Chọn Phường/Xã'); 
+            const city = addressData.find(c => c.code == cityCode); 
+            if (city && city.districts) { 
+                city.districts.sort((a, b) => a.name.localeCompare(b.name)); 
+                city.districts.forEach(district => { 
+                    const option = document.createElement('option'); 
+                    option.value = district.code; 
+                    option.textContent = district.name; 
+                    districtSelect.appendChild(option); 
+                }); 
+            } 
+        }
+        
+        function renderWardOptions(cityCode, districtCode) { 
+            if (!wardSelect) return; 
+            resetSelect(wardSelect, 'Chọn Phường/Xã'); 
+            const city = addressData.find(c => c.code == cityCode); 
+            const district = city?.districts.find(d => d.code == districtCode); 
+            if (district && district.wards) { 
+                district.wards.sort((a, b) => a.name.localeCompare(b.name)); 
+                district.wards.forEach(ward => { 
+                    const option = document.createElement('option'); 
+                    option.value = ward.code; 
+                    option.textContent = ward.name; 
+                    wardSelect.appendChild(option); 
+                }); 
+            } 
+        }
+        
+        function resetSelect(selectElement, defaultOptionText) { 
+            if (selectElement) { 
+                selectElement.innerHTML = `<option value="">${defaultOptionText}</option>`; 
+            } 
+        }
+        
+        if (citySelect) { 
+            citySelect.addEventListener('change', function() { 
+                renderDistrictOptions(this.value); 
+            }); 
+        }
+        
+        if (districtSelect) { 
+            districtSelect.addEventListener('change', function() { 
+                const selectedCityCode = citySelect.value; 
+                renderWardOptions(selectedCityCode, this.value); 
+            }); 
+        }
+
+        // --- Form Submission Logic (UNCHANGED) ---
+        async function handleOrderSubmit(event) { 
+            event.preventDefault(); 
+            const submitBtn = document.getElementById('submitOrder'); 
+            const originalBtnText = submitBtn.innerHTML; 
+            submitBtn.disabled = true; 
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> ĐANG XỬ LÝ...'; 
+            
+            const formData = new FormData(event.target); 
+            const name = formData.get('name'); 
+            const phone = formData.get('phone'); 
+            const cityText = citySelect.options[citySelect.selectedIndex]?.text || formData.get('city'); 
+            const districtText = districtSelect.options[districtSelect.selectedIndex]?.text || formData.get('district'); 
+            const wardText = wardSelect.options[wardSelect.selectedIndex]?.text || formData.get('ward'); 
+            const addressDetail = formData.get('addressDetail'); 
+            const note = formData.get('note') || ''; 
+            const date = formData.get('date'); 
+            
+            const fullAddress = `${addressDetail}, ${wardText}, ${districtText}, ${cityText}`; 
+            
+            const apiData = { 
+                date: date, 
+                name: name, 
+                phone: phone, 
+                address: fullAddress, 
+                don_hang: "Sách Thư Cho Em - 199.000đ", 
+                Note: note 
+            }; 
+            
+            const sheetDbUrl = 'https://sheetdb.io/api/v1/su22l4ev0xct0'; 
+            
+            try { 
+                const response = await fetch(sheetDbUrl, { 
+                    method: 'POST', 
+                    headers: { 
+                        'Accept': 'application/json', 
+                        'Content-Type': 'application/json' 
+                    }, 
+                    body: JSON.stringify({ data: [apiData] }) 
+                }); 
+                
+                const result = await response.json(); 
+                
+                if (response.ok && result.created) { 
+                    // === BẮT ĐẦU: THÊM MÃ TRACKING PIXEL TẠI ĐÂY ===
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'CompleteRegistration', {
+                            value: 199000,
+                            currency: 'VND'
+                        });
+                    }
+                    // === KẾT THÚC: THÊM MÃ TRACKING PIXEL TẠI ĐÂY ===
+
+                    const successMessage = document.getElementById('successMessage'); 
+                    if (successMessage) { 
+                        successMessage.classList.remove('hidden'); 
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+                    } 
+                    event.target.reset(); 
+                    renderCityOptions(addressData); // Re-render cities after reset
+                } else { 
+                    console.error('SheetDB Error:', result); 
+                    alert(`Có lỗi xảy ra khi gửi đơn hàng: ${result.error || 'Vui lòng thử lại.'}`); 
+                } 
+            } catch (error) { 
+                console.error('Error submitting order:', error); 
+                alert('Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng và thử lại!'); 
+            } finally { 
+                submitBtn.disabled = false; 
+                submitBtn.innerHTML = originalBtnText; 
+            } 
+        }
+
+        // --- Initialization on DOMContentLoaded ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize slider
+            showDetailSlide('book', 0);
+
+            // Set current date for form
+            const now = new Date();
+            const dateStr = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+            const orderDateInput = document.getElementById('orderDate');
+            if(orderDateInput) orderDateInput.value = dateStr;
+
+            // Fetch address data
+            fetchAddressData();
+
+            // Attach form submit listener
+            const orderForm = document.getElementById('orderForm');
+            if (orderForm) orderForm.addEventListener('submit', handleOrderSubmit);
+
+            // Start Countdown Timer
+            const countdownDisplay = document.getElementById('countdown-timer');
+            if (countdownDisplay) {
+                const now = new Date();
+                const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+                const secondsUntilEndOfDay = Math.round((endOfDay.getTime() - now.getTime()) / 1000);
+                if (secondsUntilEndOfDay > 0) {
+                    startCountdown(secondsUntilEndOfDay, countdownDisplay);
+                } else {
+                     countdownDisplay.innerHTML = "<span class='text-custom-red'>ƯU ĐÃI ĐÃ KẾT THÚC!</span>";
+                }
+            }
+
+             // Start Recent Order Popup
+             setTimeout(showRecentOrderPopup, 5000); // Show first popup after 5 seconds
+             setInterval(showRecentOrderPopup, 18000 + Math.random() * 7000); // Show subsequent popups randomly between 18-25 seconds
+        });
+    </script>
+</body>
+</html>
